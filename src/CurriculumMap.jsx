@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const CurriculumMap = () => {
   const [expandedSection, setExpandedSection] = useState(null);
@@ -205,7 +205,7 @@ const CurriculumMap = () => {
           🟢 CHECKPOINT = Job-ready. Apply while continuing to learn.
         </p>
 
-        {sections.map((section, index) => (
+        {sections.map((section) => (
           <div key={section.id} className="mb-8">
             {/* Checkpoint Banner */}
             {section.checkpoint && (
@@ -215,10 +215,12 @@ const CurriculumMap = () => {
             )}
 
             {/* Section Header */}
-            <div
-              className={`p-4 cursor-pointer ${section.checkpoint ? 'rounded-b-xl' : 'rounded-xl'}`}
+            <button
+              type="button"
+              className={`w-full p-4 cursor-pointer ${section.checkpoint ? 'rounded-b-xl' : 'rounded-xl'} text-left`}
               style={{ backgroundColor: section.color }}
               onClick={() => setExpandedSection(expandedSection === section.id ? null : section.id)}
+              aria-expanded={expandedSection === section.id}
             >
               <div className="flex justify-between items-center text-white">
                 <div className="flex items-center gap-3">
@@ -230,7 +232,7 @@ const CurriculumMap = () => {
                   <span className="text-xl">{expandedSection === section.id ? '▼' : '▶'}</span>
                 </div>
               </div>
-            </div>
+            </button>
 
             {/* Expanded Content */}
             {expandedSection === section.id && (
@@ -418,6 +420,7 @@ const CurriculumMap = () => {
               <span>+ Capstone + MedARC → Research roles (~48-61 weeks)</span>
             </div>
           </div>
+          
           <p className="text-green-400 mt-6 font-semibold text-center">
             Keep going until someone hires you. Every checkpoint makes you more valuable.
           </p>
